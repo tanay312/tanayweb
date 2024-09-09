@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+</head>
+<body>
+    <header>
+        <h1>Family Dashboard</h1>
+    </header>
+
+    <section>
+        <div id="map"></div>
+    </section>
+
+    <script>
+        function initMap() {
+            fetch('/location/USER_ID')
+                .then(response => response.json())
+                .then(data => {
+                    const location = data.location;
+                    const map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 15,
+                        center: location
+                    });
+                    const marker = new google.maps.Marker({
+                        position: location,
+                        map: map
+                    });
+                });
+        }
+        initMap();
+    </script>
+</body>
+</html>
